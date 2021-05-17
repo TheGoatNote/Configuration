@@ -12,3 +12,12 @@ set nobackup
 set laststatus=2
 set statusline=%F%m%r%h%w%=(%{&ff}/%Y)\ (line\ %l\/%L,\ col\ %c)\
 set wildmenu
+
+func! DeleteTrailingWS()
+  exe "normal mz"
+  %s/\s\+$//ge
+  exe "normal `z"
+endfunc
+
+autocmd BufWrite *.pp :call DeleteTrailingWS()
+au BufNewFile,BufRead *.yaml,*.yml so ~/.vim/yaml.vim
